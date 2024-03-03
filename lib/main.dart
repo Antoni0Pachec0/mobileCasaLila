@@ -1,5 +1,6 @@
 import 'package:casalila/screens/home_screen.dart';
 import 'package:casalila/screens/login_screen.dart';
+import 'package:casalila/screens/signin_screen.dart'; // Import the SignInScreen
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       title: 'Casa Lila',
       routes: {
         'login': (_) => const LoginScreen(),
+        'signin': (_) => const SignInScreen(),
         'home': (_) => const HomeScreen(),
       },
-      initialRoute: 'login',
+      initialRoute: 'login', // Set initial route to 'login' or 'signin'
     );
   }
 }

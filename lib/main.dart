@@ -2,6 +2,8 @@ import 'package:casalila/screens/home_screen.dart';
 import 'package:casalila/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
+//Funcion con la que se inicia (jecuta) la aplicacion
+//Esta llamando a la funcion de MyApp
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {

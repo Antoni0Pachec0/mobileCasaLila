@@ -114,6 +114,8 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+ // VEREMOS SI ESTA PARTE SE AFECTA 
+
   SafeArea iconopersona() {
     return SafeArea(
       child: Container(

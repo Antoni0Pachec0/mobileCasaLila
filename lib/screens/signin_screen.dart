@@ -1,8 +1,8 @@
 import 'package:casalila/widgets/input_decoration.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +13,16 @@ class LoginScreen extends StatelessWidget {
         height: double.infinity,
         child: Stack(
           children: [
-            cajaMorada(size),
-            logocasalila(),
-            loginform(context),
+            _purpleBox(size),
+            _logocasalila(),
+            _signInForm(context),
           ],
         ),
       ),
     );
   }
 
-  SingleChildScrollView loginform(BuildContext context) {
+  SingleChildScrollView _signInForm(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -45,19 +45,43 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                Text('Iniciar Sesión',
-                    style: Theme.of(context).textTheme.headlineMedium),
+                Text(
+                  'Registrarse',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
                 const SizedBox(height: 30),
                 Form(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     children: [
+                      //apellidos
+                      //FALTA VAIDAR
+                      //email,contraseña
+                      //mas datos
+                      TextFormField(
+                        keyboardType: TextInputType.name,
+                        autocorrect: false,
+                        decoration: InputDecorations.inputDecoration(
+                          hintext: 'Nombre',
+                          labeltext: 'Ingresa tu Nombre(s)',
+                          icono: const Icon(Icons.face),
+                        ),
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.name,
+                        autocorrect: false,
+                        decoration: InputDecorations.inputDecoration(
+                          hintext: 'Apellido',
+                          labeltext: 'Ingresa tus Apellidos',
+                          icono: const Icon(Icons.perm_identity),
+                        ),
+                      ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                         decoration: InputDecorations.inputDecoration(
                           hintext: 'ejemplo@gmail.com',
-                          labeltext: 'Correo Electronico',
+                          labeltext: 'Ingresa un correo',
                           icono: const Icon(Icons.alternate_email_rounded),
                         ),
                         validator: (value) {
@@ -66,22 +90,35 @@ class LoginScreen extends StatelessWidget {
                           RegExp regExp = RegExp(pattern);
                           return regExp.hasMatch(value ?? '')
                               ? null
-                              : 'Ingresa un Correo valido';
+                              : 'Ingresa un Email Valido';
                         },
                       ),
-                      const SizedBox(height: 30),
                       TextFormField(
                         autocorrect: false,
                         obscureText: true,
                         decoration: InputDecorations.inputDecoration(
                           hintext: '********',
-                          labeltext: 'Contraseña',
+                          labeltext: 'Ingresa una Contraseña',
+                          icono: const Icon(Icons.lock),
+                        ),
+                        validator: (value) {
+                          return (value != null && value.length >= 8)
+                              ? null
+                              : 'La contraseña es muy corta';
+                        },
+                      ),
+                      TextFormField(
+                        autocorrect: false,
+                        obscureText: true,
+                        decoration: InputDecorations.inputDecoration(
+                          hintext: '********',
+                          labeltext: 'Confirma tu contraseña',
                           icono: const Icon(Icons.lock_outline),
                         ),
                         validator: (value) {
                           return (value != null && value.length >= 8)
                               ? null
-                              : 'La cotraseña es muy corta';
+                              : 'La contraseña es muy corta';
                         },
                       ),
                       const SizedBox(height: 30),
@@ -93,11 +130,9 @@ class LoginScreen extends StatelessWidget {
                         color: Colors.purple,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 80,
-                            vertical: 15,
-                          ),
+                              horizontal: 80, vertical: 15),
                           child: const Text(
-                            'Ingresar',
+                            'Sign In',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -107,17 +142,17 @@ class LoginScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, 'signin');
+              Navigator.pushNamed(context, 'login');
             },
             child: const Text(
-              'Registrarse',
+              'Iniciar Sesión',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -126,27 +161,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
- // VEREMOS SI ESTA PARTE SE AFECTA 
-
-=======
-  /*
->>>>>>> 3ska
-  SafeArea iconopersona() {
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.only(top: 30),
-        width: double.infinity, // Full width
-          child: Image.asset(
-            'assets/casalila.png',
-            width: 120,
-            height: 120,
-          ),
-      ),
-    );
-  } */
-
-  SafeArea logocasalila() {
+  SafeArea _logocasalila() {
     return const SafeArea(
       child: Stack(
         children: [
@@ -167,13 +182,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Container cajaMorada(Size size) {
+  Container _purpleBox(Size size) {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color.fromRGBO(84, 22, 180, 1),
-            Color.fromRGBO(112, 39, 195, 1)
+            Color.fromRGBO(112, 39, 195, 1),
           ],
         ),
       ),
@@ -181,17 +196,17 @@ class LoginScreen extends StatelessWidget {
       height: size.height * 0.4,
       child: Stack(
         children: [
-          Positioned(top: 90, left: 30, child: burbuja()),
-          Positioned(top: -40, left: -30, child: burbuja()),
-          Positioned(top: -50, right: -20, child: burbuja()),
-          Positioned(bottom: -50, left: 10, child: burbuja()),
-          Positioned(bottom: 120, right: -30, child: burbuja()),
+          Positioned(top: 90, left: 30, child: _bubble()),
+          Positioned(top: -40, left: -30, child: _bubble()),
+          Positioned(top: -50, right: -20, child: _bubble()),
+          Positioned(bottom: -50, left: 10, child: _bubble()),
+          Positioned(bottom: 120, right: -30, child: _bubble()),
         ],
       ),
     );
   }
 
-  Container burbuja() {
+  Container _bubble() {
     return Container(
       width: 100,
       height: 100,

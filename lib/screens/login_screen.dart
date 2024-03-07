@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, 'home');
                         },
-                      )
+                      ),
                     ],
                   ),
                 )
@@ -112,34 +112,29 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          GestureDetector(
+          InkWell(
             onTap: () {
               Navigator.pushNamed(context, 'signin');
             },
-            child: const Text(
-              'Registrarse',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Registrarse',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 100,
+                  height: 2,
+                  color: const Color.fromRGBO(84, 22, 180, 1),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
-
-  /*
-  SafeArea iconopersona() {
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.only(top: 30),
-        width: double.infinity, // Full width
-          child: Image.asset(
-            'assets/casalila.png',
-            width: 120,
-            height: 120,
-          ),
-      ),
-    );
-  } */
 
   SafeArea logocasalila() {
     return const SafeArea(

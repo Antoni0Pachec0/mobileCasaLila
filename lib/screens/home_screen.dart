@@ -134,33 +134,47 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Casa Lila",
-            style: TextStyle(
-                color: Colors
-                    .deepPurple, // Change this color as per your preference
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          ),
-          Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  offset: const Offset(12, 26),
-                  blurRadius: 50,
-                  spreadRadius: 0,
-                  color: Colors.grey.withOpacity(.50)),
-            ]),
-            child: const CircleAvatar(
-              backgroundImage: AssetImage('casalila.png'),
+    return Container(
+      height: 100,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromRGBO(97, 7, 253, 1),
+            Color.fromRGBO(112, 68, 188, 1),
+          ],
+        ),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Centra verticalmente el contenido
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  right: 20.0), // Ajusta el margen derecho del texto
+              child: Text(
+                "Casa Lila",
+                style: TextStyle(
+                  color: Colors.white, // Letras de color blanco
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          )
-        ],
+            CircleAvatar(
+              radius: 30, // Cambia el radio según tu preferencia
+              backgroundImage: AssetImage('assets/casalila.png'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -189,9 +203,9 @@ class SearchInput extends StatelessWidget {
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Color.fromARGB(255, 225, 225, 225),
             hintText: 'Buscar',
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             contentPadding:
                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             border: OutlineInputBorder(
@@ -222,30 +236,44 @@ class PromoCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 150,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-              colors: [Colors.blue, Colors.green], // Change these colors
-            )),
+          borderRadius: BorderRadius.circular(
+              15), // Añadir el radio de borde al contenedor
+        ),
         child: Stack(
           children: [
-            Opacity(
-              opacity: .5,
-              child: Image.network(
-                  "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/BACKGROUND%202.png?alt=media&token=0d003860-ba2f-4782-a5ee-5d5684cdc244",
-                  fit: BoxFit.cover),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                  15), // Añadir el radio de borde a la imagen
+              child: Image.asset(
+                "assets/fondo1.jpg", // Ruta de la imagen de fondo en tus activos
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ),
-            Image.network(
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Image.png?alt=media&token=8256c357-cf86-4f76-8c4d-4322d1ebc06c"),
-            const Align(
-              alignment: Alignment.topRight,
+            Align(
+              alignment: Alignment.topLeft, // Alinear el texto a la izquierda
               child: Padding(
-                padding: EdgeInsets.all(25.0),
-                child: Text(
-                  "Que es\nCasa Lila?",
-                  style: TextStyle(
+                padding: const EdgeInsets.all(25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Colors.black.withOpacity(0.3), // Color de la sombra
+                        spreadRadius: 10, // Extensión de la sombra
+                        blurRadius: 15, // Difuminado de la sombra
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "¿Que es\nCasa Lila?",
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),

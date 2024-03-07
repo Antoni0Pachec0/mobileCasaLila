@@ -56,15 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     }),
                 IconBottomBar(
-                    text: "Eventos",
-                    icon: Icons.today,
-                    selected: _selectedIndex == 2,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 2;
-                      });
-                    }),
-                IconBottomBar(
                     text: "Galeria",
                     icon: Icons.collections,
                     selected: _selectedIndex == 3,
@@ -135,7 +126,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(10),
@@ -298,9 +289,9 @@ class Headline extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Cursos",
+                "Cursos & Talleres",
                 style: TextStyle(
-                    color: Colors.red, // Change this color
+                    color: Colors.deepPurple, // Change this color
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),
@@ -316,8 +307,7 @@ class Headline extends StatelessWidget {
           Text(
             "Ver Más",
             style: TextStyle(
-                color: Colors.green, // Change this color
-                fontWeight: FontWeight.normal),
+                color: Colors.deepPurpleAccent, fontWeight: FontWeight.normal),
           ),
         ],
       ),
@@ -339,14 +329,14 @@ class SHeadline extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Eventos",
+                "Mas Información",
                 style: TextStyle(
-                    color: Colors.red, // Change this color
+                    color: Colors.deepPurple, // Change this color
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),
               Text(
-                "Conocé mas de nuestros eventos",
+                "Conocé mas Acerca de Nosotros",
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 12,
@@ -357,7 +347,7 @@ class SHeadline extends StatelessWidget {
           Text(
             "Ver mas",
             style: TextStyle(
-                color: Colors.green, // Change this color
+                color: Colors.deepPurpleAccent, // Change this color
                 fontWeight: FontWeight.normal),
           ),
         ],
@@ -380,17 +370,20 @@ class CardListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: const [
             Card(
-                "Vegan",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
-                "8 min away"),
+              "Academicos",
+              AssetImage("assets/libros.png"),
+              "Cursos Academicos",
+            ),
             Card(
-                "Italian ",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Restaurant%20Image.png?alt=media&token=43509b4c-269e-4279-8c88-36dc9ed27a66",
-                "12 min away"),
+              "Culturales ",
+              AssetImage("assets/culture.png"),
+              "Talleres Culturales",
+            ),
             Card(
-                "Vegan",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
-                "15 min away"),
+              "Verano",
+              AssetImage("assets/verano.png"),
+              "Cursos de Verano",
+            ),
           ],
         ),
       ),
@@ -400,10 +393,11 @@ class CardListView extends StatelessWidget {
 
 class Card extends StatelessWidget {
   final String text;
-  final String imageUrl;
+  final ImageProvider<Object> imageProvider; // Cambio aquí
   final String subtitle;
 
-  const Card(this.text, this.imageUrl, this.subtitle, {super.key});
+  const Card(this.text, this.imageProvider, this.subtitle,
+      {super.key}); // Cambio aquí
 
   @override
   Widget build(BuildContext context) {
@@ -418,37 +412,40 @@ class Card extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.5),
           boxShadow: [
             BoxShadow(
-                offset: const Offset(10, 20),
-                blurRadius: 10,
-                spreadRadius: 0,
-                color: Colors.grey.withOpacity(.05)),
+              offset: const Offset(10, 20),
+              blurRadius: 10,
+              spreadRadius: 0,
+              color: Colors.grey.withOpacity(.05),
+            ),
           ],
         ),
         child: Column(
           children: [
-            Image.network(imageUrl, height: 70, fit: BoxFit.cover),
+            Image(
+                image: imageProvider,
+                height: 70,
+                fit: BoxFit.cover), // Cambio aquí
             const Spacer(),
-            Text(text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                )),
-            const SizedBox(
-              height: 5,
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
+            const SizedBox(height: 5),
             Text(
               subtitle,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12),
+                color: Colors.grey,
+                fontWeight: FontWeight.normal,
+                fontSize: 12,
+              ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
           ],
         ),
       ),

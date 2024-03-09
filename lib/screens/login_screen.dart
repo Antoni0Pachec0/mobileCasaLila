@@ -136,12 +136,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
  // VEREMOS SI ESTA PARTE SE AFECTA 
 
-=======
   /*
->>>>>>> 3ska
   SafeArea iconopersona() {
     return SafeArea(
       child: Container(

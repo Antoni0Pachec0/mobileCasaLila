@@ -56,15 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     }),
                 IconBottomBar(
-                    text: "Eventos",
-                    icon: Icons.today,
-                    selected: _selectedIndex == 2,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 2;
-                      });
-                    }),
-                IconBottomBar(
                     text: "Galeria",
                     icon: Icons.collections,
                     selected: _selectedIndex == 3,
@@ -134,33 +125,47 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Casa Lila",
-            style: TextStyle(
-                color: Colors
-                    .deepPurple, // Change this color as per your preference
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          ),
-          Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  offset: const Offset(12, 26),
-                  blurRadius: 50,
-                  spreadRadius: 0,
-                  color: Colors.grey.withOpacity(.50)),
-            ]),
-            child: const CircleAvatar(
-              backgroundImage: AssetImage('casalila.png'),
+    return Container(
+      height: 90,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromRGBO(97, 7, 253, 1),
+            Color.fromRGBO(112, 68, 188, 1),
+          ],
+        ),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Centra verticalmente el contenido
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  right: 20.0), // Ajusta el margen derecho del texto
+              child: Text(
+                "Casa Lila",
+                style: TextStyle(
+                  color: Colors.white, // Letras de color blanco
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          )
-        ],
+            CircleAvatar(
+              radius: 30, // Cambia el radio según tu preferencia
+              backgroundImage: AssetImage('assets/casalila.png'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -189,9 +194,9 @@ class SearchInput extends StatelessWidget {
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Color.fromARGB(255, 225, 225, 225),
             hintText: 'Buscar',
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             contentPadding:
                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             border: OutlineInputBorder(
@@ -222,30 +227,44 @@ class PromoCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 150,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-              colors: [Colors.blue, Colors.green], // Change these colors
-            )),
+          borderRadius: BorderRadius.circular(
+              15), // Añadir el radio de borde al contenedor
+        ),
         child: Stack(
           children: [
-            Opacity(
-              opacity: .5,
-              child: Image.network(
-                  "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/BACKGROUND%202.png?alt=media&token=0d003860-ba2f-4782-a5ee-5d5684cdc244",
-                  fit: BoxFit.cover),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                  15), // Añadir el radio de borde a la imagen
+              child: Image.asset(
+                "assets/fondo1.jpg", // Ruta de la imagen de fondo en tus activos
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ),
-            Image.network(
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Image.png?alt=media&token=8256c357-cf86-4f76-8c4d-4322d1ebc06c"),
-            const Align(
-              alignment: Alignment.topRight,
+            Align(
+              alignment: Alignment.topLeft, // Alinear el texto a la izquierda
               child: Padding(
-                padding: EdgeInsets.all(25.0),
-                child: Text(
-                  "Que es\nCasa Lila?",
-                  style: TextStyle(
+                padding: const EdgeInsets.all(25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Colors.black.withOpacity(0.3), // Color de la sombra
+                        spreadRadius: 10, // Extensión de la sombra
+                        blurRadius: 15, // Difuminado de la sombra
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "¿Que es\nCasa Lila?",
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -270,9 +289,9 @@ class Headline extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Cursos",
+                "Cursos & Talleres",
                 style: TextStyle(
-                    color: Colors.red, // Change this color
+                    color: Colors.deepPurple, // Change this color
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),
@@ -288,8 +307,7 @@ class Headline extends StatelessWidget {
           Text(
             "Ver Más",
             style: TextStyle(
-                color: Colors.green, // Change this color
-                fontWeight: FontWeight.normal),
+                color: Colors.deepPurpleAccent, fontWeight: FontWeight.normal),
           ),
         ],
       ),
@@ -311,14 +329,14 @@ class SHeadline extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Eventos",
+                "Mas Información",
                 style: TextStyle(
-                    color: Colors.red, // Change this color
+                    color: Colors.deepPurple, // Change this color
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),
               Text(
-                "Conocé mas de nuestros eventos",
+                "Conocé mas Acerca de Nosotros",
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 12,
@@ -329,7 +347,7 @@ class SHeadline extends StatelessWidget {
           Text(
             "Ver mas",
             style: TextStyle(
-                color: Colors.green, // Change this color
+                color: Colors.deepPurpleAccent, // Change this color
                 fontWeight: FontWeight.normal),
           ),
         ],
@@ -352,17 +370,20 @@ class CardListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: const [
             Card(
-                "Vegan",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
-                "8 min away"),
+              "Academicos",
+              AssetImage("assets/libros.png"),
+              "Cursos Academicos",
+            ),
             Card(
-                "Italian ",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Restaurant%20Image.png?alt=media&token=43509b4c-269e-4279-8c88-36dc9ed27a66",
-                "12 min away"),
+              "Culturales ",
+              AssetImage("assets/culture.png"),
+              "Talleres Culturales",
+            ),
             Card(
-                "Vegan",
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
-                "15 min away"),
+              "Verano",
+              AssetImage("assets/verano.png"),
+              "Cursos de Verano",
+            ),
           ],
         ),
       ),
@@ -372,10 +393,11 @@ class CardListView extends StatelessWidget {
 
 class Card extends StatelessWidget {
   final String text;
-  final String imageUrl;
+  final ImageProvider<Object> imageProvider; // Cambio aquí
   final String subtitle;
 
-  const Card(this.text, this.imageUrl, this.subtitle, {super.key});
+  const Card(this.text, this.imageProvider, this.subtitle,
+      {super.key}); // Cambio aquí
 
   @override
   Widget build(BuildContext context) {
@@ -390,37 +412,40 @@ class Card extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.5),
           boxShadow: [
             BoxShadow(
-                offset: const Offset(10, 20),
-                blurRadius: 10,
-                spreadRadius: 0,
-                color: Colors.grey.withOpacity(.05)),
+              offset: const Offset(10, 20),
+              blurRadius: 10,
+              spreadRadius: 0,
+              color: Colors.grey.withOpacity(.05),
+            ),
           ],
         ),
         child: Column(
           children: [
-            Image.network(imageUrl, height: 70, fit: BoxFit.cover),
+            Image(
+                image: imageProvider,
+                height: 70,
+                fit: BoxFit.cover), // Cambio aquí
             const Spacer(),
-            Text(text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                )),
-            const SizedBox(
-              height: 5,
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
+            const SizedBox(height: 5),
             Text(
               subtitle,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12),
+                color: Colors.grey,
+                fontWeight: FontWeight.normal,
+                fontSize: 12,
+              ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
           ],
         ),
       ),

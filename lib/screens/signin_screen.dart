@@ -26,7 +26,7 @@ class SignInScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 250),
+          const SizedBox(height: 200),
           Container(
             padding: const EdgeInsets.all(20),
             margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -130,7 +130,9 @@ class SignInScreen extends StatelessWidget {
                         color: Colors.purple,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 80, vertical: 15),
+                            horizontal: 80,
+                            vertical: 15,
+                          ),
                           child: const Text(
                             'Sign In',
                             style: TextStyle(color: Colors.white),
@@ -139,7 +141,7 @@ class SignInScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, 'home');
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -147,13 +149,23 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          GestureDetector(
+          InkWell(
             onTap: () {
               Navigator.pushNamed(context, 'login');
             },
-            child: const Text(
-              'Iniciar Sesión',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Iniciar Sesión',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 115,
+                  height: 2,
+                  color: const Color.fromRGBO(84, 22, 180, 1),
+                ),
+              ],
             ),
           ),
         ],

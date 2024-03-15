@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:casalila/screens/inc/topbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: Colors.deepPurple,
         child: SizedBox(
-          height: 56,
+          height: 100,
           width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.only(left: 25.0, right: 25.0),
@@ -38,41 +38,49 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconBottomBar(
-                    text: "Inicio",
-                    icon: Icons.home,
-                    selected: _selectedIndex == 0,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 0;
-                      });
-                    }),
+                  text: "Inicio",
+                  icon: Icons.home,
+                  selected: _selectedIndex == 0,
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                    Navigator.pushReplacementNamed(context, 'home');
+                  },
+                ),
                 IconBottomBar(
-                    text: "Cursos",
-                    icon: Icons.article,
-                    selected: _selectedIndex == 1,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 1;
-                      });
-                    }),
+                  text: "Cursos",
+                  icon: Icons.article,
+                  selected: _selectedIndex == 1,
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 1;
+                    });
+                    Navigator.pushReplacementNamed(context, 'cursos');
+                  },
+                ),
                 IconBottomBar(
-                    text: "Galeria",
-                    icon: Icons.collections,
-                    selected: _selectedIndex == 3,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 3;
-                      });
-                    }),
+                  text: "Galeria",
+                  icon: Icons.collections,
+                  selected: _selectedIndex == 2,
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 2;
+                    });
+                    Navigator.pushReplacementNamed(context, 'galery');
+                  },
+                ),
                 IconBottomBar(
-                    text: "Perfil",
-                    icon: Icons.person,
-                    selected: _selectedIndex == 4,
-                    onPressed: () {
-                      setState(() {
-                        _selectedIndex = 4;
-                      });
-                    })
+                  text: "Perfil",
+                  icon: Icons.person,
+                  selected: _selectedIndex == 3,
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 3;
+                    });
+                    Navigator.pushReplacementNamed(context, 'profile');
+                  },
+                )
               ],
             ),
           ),
@@ -102,8 +110,9 @@ class IconBottomBar extends StatelessWidget {
           onPressed: onPressed,
           icon: Icon(
             icon,
-            color:
-                selected ? const Color.fromRGBO(145, 35, 234, 1) : Colors.grey,
+            color: selected
+                ? const Color.fromARGB(255, 255, 255, 255)
+                : const Color.fromRGBO(248, 196, 248, 1),
           ),
         ),
         Text(
@@ -112,61 +121,10 @@ class IconBottomBar extends StatelessWidget {
               fontSize: 14,
               height: .1,
               color: selected
-                  ? const Color.fromRGBO(145, 35, 234, 1)
-                  : Colors.grey),
+                  ? const Color.fromARGB(255, 255, 255, 255)
+                  : const Color.fromRGBO(248, 196, 248, 1)),
         )
       ],
-    );
-  }
-}
-
-class TopBar extends StatelessWidget {
-  const TopBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          bottomRight: Radius.circular(10),
-        ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromRGBO(97, 7, 253, 1),
-            Color.fromRGBO(112, 68, 188, 1),
-          ],
-        ),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment:
-              CrossAxisAlignment.center, // Centra verticalmente el contenido
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  right: 20.0), // Ajusta el margen derecho del texto
-              child: Text(
-                "Casa Lila",
-                style: TextStyle(
-                  color: Colors.white, // Letras de color blanco
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            CircleAvatar(
-              radius: 30, // Cambia el radio según tu preferencia
-              backgroundImage: AssetImage('assets/casalila.png'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -227,33 +185,30 @@ class PromoCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 150,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-              15), // Añadir el radio de borde al contenedor
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  15), // Añadir el radio de borde a la imagen
+              borderRadius: BorderRadius.circular(15),
               child: Image.asset(
-                "assets/fondo1.jpg", // Ruta de la imagen de fondo en tus activos
+                "assets/fondo1.jpg",
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
               ),
             ),
             Align(
-              alignment: Alignment.topLeft, // Alinear el texto a la izquierda
+              alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Container(
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.3), // Color de la sombra
-                        spreadRadius: 10, // Extensión de la sombra
-                        blurRadius: 15, // Difuminado de la sombra
+                        color: Colors.black.withOpacity(0.3),
+                        spreadRadius: 10,
+                        blurRadius: 15,
                       ),
                     ],
                   ),
@@ -291,7 +246,7 @@ class Headline extends StatelessWidget {
               Text(
                 "Cursos & Talleres",
                 style: TextStyle(
-                    color: Colors.deepPurple, // Change this color
+                    color: Colors.deepPurple,
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),
@@ -345,11 +300,11 @@ class SHeadline extends StatelessWidget {
             ],
           ),
           Text(
-            "Ver mas",
+            "Ver Más",
             style: TextStyle(
                 color: Colors.deepPurpleAccent, // Change this color
                 fontWeight: FontWeight.normal),
-          ),
+          )
         ],
       ),
     );

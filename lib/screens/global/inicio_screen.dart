@@ -300,10 +300,12 @@ class SHeadline extends StatelessWidget {
             ],
           ),
           Text(
-            "Ver Ms",
+          onPressed: (
+            "Ver Más",
             style: TextStyle(
                 color: Colors.deepPurpleAccent, // Change this color
                 fontWeight: FontWeight.normal),
+          )
           ),
         ],
       ),
